@@ -1,0 +1,16 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+        name   = MatthewRalston
+        email  = mrals89@gmail.com
+	signingkey = BF8E1465E7C91DBF
+[color]
+        ui     = true
+[core]
+        editor = emacs
+[alias]
+	amen = commit --amend --no-edit
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main

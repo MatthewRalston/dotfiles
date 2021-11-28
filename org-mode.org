@@ -1,0 +1,89 @@
+#+TITLE: Org-Mode Cheatsheet
+#+SUBTITLE: A introduction to org-mode
+#+AUTHOR: Matt Ralston <mralston.development@gmail.com>
+#+PROPERTY: TYPE_all Meta Create Cycle 
+#+OPTIONS: ^:{}
+#+STARTUP: latexpreview
+#+OPTIONS: tex:t
+
+* Org-mode essentials
+:PROPERTIES:
+:TYPE:     Meta
+:END:
+
+** M-{Left,Right,Up,Down}        - Change indentation, position of bullet
+** M-RET        - New bullet at current level
+:PROPERTIES:
+:TYPE: Create
+:END:
+*** M-S-RET New TODO item at current level
+:PROPERTIES:
+:TYPE: Create
+:END:
+*** S-{Left,Right} Change state of TODO item
+*** C-c C-x TAB        - CLOCK IN on a task!
+*** C-c C-x C-o        - CLOCK OUT on a task!
+*** S-Right        - Cycle to DONE to complete AND log the completion time!
+*** C-c C-s        - Schedule time for a task
+*** C-c C-d        - Schedule a deadline (7d)
+** Tasks / checkboxes [1/2]
+    - [X]        - Step 1: Use list syntax: '-'
+    - [ ]        - Step 2: Use checkbox with / to reference task completeness in parent task
+      - [ ]        - Step 2.a: Use indentation rules (M-RET + M-{Left,Right,Up,Down}) to add subtasks
+      - [ ]        - Step 2.b: As subtasks are checked, they will eventually check the parent task (Step 2)
+*** C-C C-c        - Toggle checkbox
+** Formatting (org-mode plain-text formatting)
+*** *Bold*
+*** /italic/
+*** _underline_
+*** =verbatim=
+*** +strikethrough+
+*** Example^{superscript}
+*** Example_{subscript}
+** Formatting (LaTeX)
+*** C-c C-x C-l        - Use LaTeX to preview fragments
+*** $$ Cov(X_{i}, X_{k}) = 0 $$ iff X_{i} and X_{k} are independent
+** Source code blocks
+*** <s TAB
+*** #+BEGIN_SRC lang
+*** #+END_SRC
+*** C-c '        - Edit source block in buffer with major mode of language
+* Org-mode drawers/properties
+  :PROPERTIES:
+  :TYPE: Meta
+  :END:
+** Category property can be used to group information
+** C-c C-x p        - New property
+:PROPERTIES:
+:TYPE: Create
+:END:
+** C-c C-x s        - Set property
+** C-c C-x d        - Delete property
+* Org-agenda
+:PROPERTIES:
+:TYPE: Meta
+:END:
+** C-c a        - Enter agenda 
+** Relies on aggregation from existing files defined in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]]
+** Scheduled tasks will appear in agenda for current week/day
+** Other tasks must be aggregated
+* .org file structure
+:PROPERTIES:
+:TYPE: Meta
+:END:
+** Top level is main categories of descriptors only
+** Projects and tasks begin at level 2
+
+* Org-mode workflow + org-capture
+:PROPERTIES:
+:TYPE:     Meta
+:END:
+** Clock-in on default task
+** Check email/news
+*** org-capture (C-c c) notes (n) or respond (r)
+*** Note meetings (m) or phonecalls (p)
+** Work on tasks (clock-in as well)
+** Note interruptions with a journal entry(C-c C-c)
+** Clock-out for lunch, clock-in afterwards
+** Work on more tasks
+** Refile/reorg tasks at the end of the day

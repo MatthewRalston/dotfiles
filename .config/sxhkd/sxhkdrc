@@ -1,0 +1,217 @@
+#
+# wm independent hotkeys
+#
+
+#
+# Restart + reload
+#
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+
+# terminal emulator
+super + n
+	xfce4-terminal
+	# alacritty
+
+# cheatsheet
+super + c
+        emacs /home/matt/.config/sxhkd/sxhkdrc
+
+super + h
+        emacs /home/matt/Documents/laptop_rice.md /home/matt/.config/sxhkd/sxhkdrc
+
+super + e
+        emacs
+
+super + r
+        rstudio
+
+# program launcher
+super + @space
+        albert
+
+# Application launcher
+super + d
+        rofi -modi run,drun,window -show drun -show-icons -sidebar-mode 2> ~/.rofi.log
+
+super + b
+        chromium
+
+super + f
+        thunar
+
+super + s
+        spotify
+
+
+#
+# bspwm hotkeys
+#
+
+# close and kill
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+#super + m
+#	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+
+
+#
+# move/resize
+#
+# https://classicforum.manjaro.org/index.php?topic=18970.0
+#move windows
+# super + shift + {d,a}
+#       $HOME/.bspwm_move.sh {-p,-n} -x -s 20
+
+# super + shift + {s,w}
+#     $HOME/.bspwm_move.sh {-p,-n} -y -s 20
+
+# #multitool resize
+# super + ctrl + {d,a}
+#       $HOME/.bspwm_resize.sh {-p,-n} -x -s 20
+
+# super + ctrl + {s,w}
+#     $HOME/.bspwm_resize.sh {-p,-n} -y -s 20
+
+# #multitool resize
+# super + {Right,Left}
+#       $HOME/.bspwm_resize.sh {-p,-n} -x -s 20
+
+# super + {Down,Up}
+#     $HOME/.bspwm_resize.sh {-p,-n} -y -s 20
+
+
+super + {Left,Down,Up,Right}
+  bspc node -z {left -20 0 || bspc node -z right -20 0, \
+                bottom 0 20 || bspc node -z top 0 20,\
+                top 0 -20 || bspc node -z bottom 0 -20,\
+                right 20 0 || bspc node -z left 20 0}
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+#
+# other
+#
+
+
+bindsym XF86MonBrightnessUp exec "~/.config/polybar/launch.sh"
+
+
+XF86MonBrightnessDown
+	brightnessctl s 10-
+#	xbacklight -dec 10%
+
+XF86MonBrightnessUp
+	brightnessctl s 10+
+#	xbacklight -inc 10%
+
+
+
+# Changing the Volume
+
+XF86Audio{Raise,Lower}Volume
+	pactl set-sink-volume 0 {+,-}5%
+#pulsemixer --change-volume {+,-}10
+
+XF86AudioMute
+	pactl set-sink-mute 0 toggle
+#pulsemixer --toggle-mute
+
