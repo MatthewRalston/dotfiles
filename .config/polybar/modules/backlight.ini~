@@ -1,0 +1,49 @@
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = amdgpu_bl0
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <ramp>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
+
+; format = <ramp>
+; ; format-background = ${colors.bg-alt}
+; format-padding = 1
+; label = %percentage%%
+; label-padding = 1
+
+; ramp-0 = %{T4}%{T-}
+; ramp-1 = %{T4}%{T-}
+; ramp-2 = %{T4}%{T-}
+; ramp-3 = %{T4}%{T-}
+; ramp-4 = %{T4}%{T-}
+; ramp-5 = %{T4}%{T-}
+; ramp-6 = %{T4}%{T-}
+; ramp-0-foreground = ${colors.blue}
+; ramp-1-foreground = ${colors.blue}
+; ramp-2-foreground = ${colors.cyan}
+; ramp-3-foreground = ${colors.cyan}
+; ramp-4-foreground = ${colors.orange}
+; ramp-5-foreground = ${colors.yellow}
+; ramp-6-foreground = ${colors.yellow}

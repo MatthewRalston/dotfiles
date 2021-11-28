@@ -1,0 +1,1 @@
+(ess idle-org-agenda jedi auto-complete jedi-core epc ctable concurrent jekyll-modes json-mode org-beautify-theme org-clock-reminder org-inline-anim org-inline-pdf org-superstar org org-tag-beautify all-the-icons org-pretty-tags polymode popup python-environment deferred rsense rspec-mode sbt-mode scala-mode simple-httpd web-mode yaml-mode)

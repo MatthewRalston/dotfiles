@@ -1,0 +1,19 @@
+add Deadmau5/
+add Jurassic 5/
+add Justice/
+save -l default
+quit
+load /storage/media/Music/playlist.pls
+clear
+save /storage/media/Music/default.pls
+load playlist.pls
+save playlist.pls
+load -p default.pls
+save -p default.pls
+load -p default
+save -p default
+add 00 OH [A-Track Remix].mp3
+q
+set passwd=4439molly
+load /home/matt/.config/cmus/lib.pl
+load 
