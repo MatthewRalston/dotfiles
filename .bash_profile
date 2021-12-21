@@ -148,10 +148,10 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Terminal prompt
-export PS1="$(gitmode --start)"
-#export PS1="\[${UC}\]\u@\h: \[${COLOR_GREEN}\]\$(vcprompt)| \[${COLOR_LIGHT_CYAN}\]\w >"
+export PS1="$($HOME/.gitmode.sh --start)"
+##export PS1="\[${UC}\]\u@\h: \[${COLOR_GREEN}\]\$($HOME/.gitmode.sh --start)| \[${COLOR_LIGHT_CYAN}\]\w >"
 
-#PS1="$TITLEBAR\n\[${UC}\]\u \[${COLOR_LIGHT_BLUE}\]\${PWD} \[${COLOR_BLACK}\]\$(vcprompt) \n\[${COLOR_LIGHT_GREEN}\]→\[${COLOR_NC}\] "
+#PS1="$TITLEBAR\n\[${UC}\]\u \[${COLOR_LIGHT_BLUE}\]\${PWD} \[${COLOR_BLACK}\]\$(gitmode --start) \n\[${COLOR_LIGHT_GREEN}\]→\[${COLOR_NC}\] "
 
 
 # R U B Y
