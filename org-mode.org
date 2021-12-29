@@ -67,6 +67,37 @@
 ** Relies on aggregation from existing files defined in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]]
 ** Scheduled tasks will appear in agenda for current week/day
 ** Other tasks must be aggregated
+* Org-capture
+CLOSED: [2021-12-27 Mon 17:33]
+:LOGBOOK:
+CLOCK: [2021-12-27 Mon 17:01]--[2021-12-27 Mon 17:01] =>  0:00
+:END:
+:PROPERTIES:
+:TYPE:     Meta
+:END:
+** C-c c        - Open org-capture
+:PROPERTIES:
+:TYPE:     Create
+:END:
+*** C-c C-s        - Schedule time for a task
+*** C-c C-d        - Schedule a deadline (7d)
+** C-c C-c      - Complete capture from template
+** C-c C-w      - Refile between default agenda files
+*** Currently set in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]] under org-capture-templates
+**** ~/refile.org
+**** ~/tasks.org
+**** ~/Documents/orgs/roam/master.org
+** Manually refile
+* Org-roam
+:PROPERTIES:
+:TYPE:     Meta
+:END:
+** C-c n f      - Create a new node in the org roam directory
+:PROPERTIES:
+:TYPE:     Create
+:END:
+*** Currently set in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]] under ;; org-roam "use-package" configuration
+Opens a new node file under the directory, allows you to put additional information
 * .org file structure
 :PROPERTIES:
 :TYPE: Meta

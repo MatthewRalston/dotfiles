@@ -1,4 +1,7 @@
-(load-theme 'manoj-dark t)
+
+;;(load-theme 'manoj-dark t)
+(load-theme 'spacemacs-dark t)
+
 (setq inhibit-startup-screen t)
 (global-display-line-numbers-mode)
 
@@ -21,3 +24,18 @@
 (setq flyspell-issue-welcome-flag nil)
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
+
+
+;; Transparency
+(setq default-frame-alist
+       '((alpha . 95)))
+
+;; Fonts
+(add-to-list 'default-frame-alist
+             '(font . "Iosevka Term-12"))
+
+
+;; Use DejaVu Sans Mono as a fallback in fontset-startup
+;; before resorting to fontset-default.
+(set-fontset-font "fontset-startup" nil "DejaVu Sans Mono"
+                  nil 'append)
