@@ -1,5 +1,5 @@
 #! /bin/sh
-
+compton &
 
 [ -e "$SXHKD_FIFO" ] && rm "$SXHKD_FIFO"
 mkfifo "$SXHKD_FIFO"

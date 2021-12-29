@@ -4,18 +4,17 @@
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 
-;; Automatic line wrap
-(add-hook 'org-mode-hook
-	  (lambda() (setq truncate-lines t)))
-;;(set-default 'truncate-lines t)
 
+;; org-tree-slide-mode
+(define-key org-mode-map (kbd "<f9>") 'org-tree-slide-mode)
+(define-key org-mode-map (kbd "S-<f9>") 'org-tree-slide-skip-done-toggle)
 
 ;; org-roam
 (setq org-roam-v2-ack t)
 (use-package org-roam
   :ensure t
   :custom
-  (org-roam-directory (file-truename "~/Documents/orgs"))
+  (org-roam-directory (file-truename "~/Documents/orgs/roam"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -37,9 +36,21 @@
           org-roam-ui-open-on-start nil))
 
 
+;; org-calDav
+;; (use-package org-caldav
+;;   :config
+;;   (setq org-caldav-oauth2-client-id ""
+;; 	org-caldav-oauth2-client-secret ""
+;; 	org-caldav-url 'google
+;; 	org-caldav-calendar-id "vhbk922u116uc7sa45gil0r9fk@group.calendar.google.com"
+;; 	org-caldav-inbox "~/Documents/orgs/org-caldav.org"
+;; 	org-caldav-files '("~/tasks.org")
+;; 	))
+
 ;; Org-agenda defaults
 (setq org-agenda-files '("~/notes.org"
-			 "~/tasks.org"))
+			 "~/tasks.org"
+			 "~/Documents/orgs/roam/master.org"))
 (setq org-deadline-warning-days 7)
 ;; Org-agenda on idle
 (require 'idle-org-agenda)
@@ -49,7 +60,7 @@
 
 
 ;; Org-capture defaults
-(setq org-directory "~/Documents/org/")
+(setq org-directory "~/Documents/orgs/")
 (setq org-default-notes-file "~/refile.org")
 
 ;; I use C-c c to start capture mode
@@ -116,10 +127,16 @@
 (add-hook 'org-mode-hook
 	  (lambda() (org-superstar-mode 1)))
 (setq org-startup-with-inline-images t)
-
-
+;; Automatic line wrap
+;; (add-hook 'org-mode-hook
+;; 	   (setq truncate-lines t))
+;;         (lambda() (setq truncate-lines t)))
+;; (set-default 'truncate-lines t)
+;; 
 
 ;; Keybinding overrides
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(define-key org-mode-map "\M-l" 'toggle-truncate-lines)
+
