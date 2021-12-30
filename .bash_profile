@@ -6,7 +6,7 @@
 
 # Finished adapting your PATH environment variable for use with MacPorts.
 
-export PERL5LIB="$HOME/SourceCache/bioperl-live:$PERL5LIB"
+#export PERL5LIB="$HOME/SourceCache/bioperl-live:$PERL5LIB"
 
 
 # Choose Default editor
@@ -36,7 +36,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias diskspace="du -S | sort -n -r |more"
 alias grabcrons='journalctl -xe | grep CRON'
-alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
+#alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
+#alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
+
 
 # Shows even more permissions
 lsd () {
@@ -62,7 +64,7 @@ alias l='ls -CFlh'
 
 alias create-patchfile="diff -uNr" #<orig> <new>
 alias cmus='cmus --listen 0.0.0.0'
-alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
+
 alias grep='grep --color=auto'
 #alias psgrep='ps aux | grep'
 alias please='sudo $(history -p \!\!)'
@@ -107,7 +109,6 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 
 
 
-
 ####################
 # P A T H
 ####################
@@ -130,6 +131,7 @@ then
    PATH=$PATH:$PYENV_ROOT/bin
 fi
 eval "$(pyenv init -)"
+#eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 #pyenv activate v2.7.10
 
@@ -168,13 +170,13 @@ export RSENSE_HOME=$HOME/pckges/rsense-0.3
 ####################
 # Ricing
 ####################
-if [ $(hostname) == "argo" ];
-then
-    powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    . /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
-fi
+# if [ $(hostname) == "argo" ];
+# then
+#     powerline-daemon -q
+#     POWERLINE_BASH_CONTINUATION=1
+#     POWERLINE_BASH_SELECT=1
+#     . /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+# fi
 
 
 
@@ -227,7 +229,7 @@ export PATH
 if [ $(hostname) == "argo" ];
 then
     #bash $HOME/.profile.sh
-    lolcat .asciiowl.txt
+    /bin/lolcat .asciiowl.txt
     neofetch
     xmodmap ~/.xmodmap
     # Other bash environment variables
