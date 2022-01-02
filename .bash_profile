@@ -130,11 +130,11 @@ PATH=$PATH:$HOME/.cargo/bin
 if [ $(hostname) == "argo" ] || [ $(hostname) == "wei" ];
 then
    export PYENV_ROOT=$HOME/.pyenv
-   PATH=$PATH:$PYENV_ROOT/bin
+   PATH=$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims
 fi
 
-#eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+#eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 #pyenv activate v2.7.10
 
