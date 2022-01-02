@@ -6,7 +6,8 @@
 
 # Finished adapting your PATH environment variable for use with MacPorts.
 
-#export PERL5LIB="$HOME/SourceCache/bioperl-live:$PERL5LIB"
+export PERL5LIB="$HOME/SourceCache/bioperl-live"
+#:$PERL5LIB"
 
 
 # Choose Default editor
@@ -125,13 +126,15 @@ PATH=/bin:/usr/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
 PATH=$PATH:$HOME/.cargo/bin
 
 # P Y T H O N
+# Additional system-specific pyenv commands below
 if [ $(hostname) == "argo" ] || [ $(hostname) == "wei" ];
 then
    export PYENV_ROOT=$HOME/.pyenv
    PATH=$PATH:$PYENV_ROOT/bin
 fi
-eval "$(pyenv init -)"
-#eval "$(pyenv init --path)"
+
+#eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 #pyenv activate v2.7.10
 
@@ -208,7 +211,8 @@ source /usr/share/bash-completion/completions/systemctl
 # Download Entrez Direct https://www.ncbi.nlm.nih.gov/books/NBK179288/
 PATH=$PATH:$HOME/edirect
 
-
+# Refgenie
+export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
 
 
 ####################
@@ -229,8 +233,9 @@ export PATH
 if [ $(hostname) == "argo" ];
 then
     #bash $HOME/.profile.sh
-    /bin/lolcat .asciiowl.txt
+    /bin/lolcat $HOME/.asciiowl.txt
     neofetch
+    alias yay='paru'
     xmodmap ~/.xmodmap
     # Other bash environment variables
     export TMPDIR=/storage/data/scratch
@@ -238,7 +243,7 @@ then
     #export TEMP
 elif [ $(hostname) == "wei" ];
 then
-    /usr/local/bin/lolcat .asciiowl.txt
+    /usr/local/bin/lolcat $HOME/.asciiowl.txt
     neofetch
     export SXHKD_FIFO=/tmp/sxhkd-fifo
 fi
