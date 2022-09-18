@@ -48,6 +48,9 @@
 *** #+BEGIN_SRC lang
 *** #+END_SRC
 *** C-c '        - Edit source block in buffer with major mode of language
+** Clock-in on TODO item
+*** C-c C-x C-i    - Clock in on item
+*** C-c C-x C-o    - Clock out on item
 * Org-mode drawers/properties
   :PROPERTIES:
   :TYPE: Meta

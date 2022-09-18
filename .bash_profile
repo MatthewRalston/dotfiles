@@ -28,7 +28,7 @@ source ~/.functions.sh
 export HISTCONTROL=ignoredups
 #alias rm='echo "rm is disabled, use trash or /bin/rm instead/."'
 export LS_OPTS='-lah --color=auto'
-alias ls="ls $LS_OPTS"
+#alias ls="ls $LS_OPTS"
 #alias ls='ls -l -h'
 alias ..='cd ..'
 alias ...='cd ../..'
