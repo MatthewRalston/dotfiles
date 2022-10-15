@@ -115,7 +115,7 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 ####################
 
 # P A T H
-PATH=/bin:/usr/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
+PATH=/usr/local/bin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
 
 
 ####################
@@ -126,11 +126,13 @@ PATH=/bin:/usr/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
 PATH=$PATH:$HOME/.cargo/bin
 
 # P Y T H O N
+# Use .pythonrc
+export PYTHONSTARTUP=~/.pythonrc
 # Additional system-specific pyenv commands below
 if [ $(hostname) == "argo" ] || [ $(hostname) == "wei" ];
 then
    export PYENV_ROOT=$HOME/.pyenv
-   PATH=$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims
+   PATH=$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH
 fi
 
 eval "$(pyenv init -)"
@@ -143,6 +145,11 @@ if [ $(hostname) == "argo" ];
 then
     PATH=$PATH:/opt/texlive/2021/bin/x86_64-linux
 fi
+
+
+# JAVA (for Neo4j)
+#JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
+#PATH="/usr/lib/jvm/jdk-11.0.8/bin:$PATH"
 
 
 # N O D E
