@@ -121,7 +121,7 @@ ${alignr}v2.0.3${font}${color}
 #                     N e t w o r k
 ${goto 12}${color1}+----Net ${color} ( Up  ${color4}${upspeedf wlan0}KB/s${color} | Down ${color4}${downspeedf wlan0}KB/s${color} )
 ${goto 15}|${goto 38}+-- ${color2}Ip${goto 155}${addr wlan0}${color}
-${goto 15}|${goto 38}+-- ${color2}External Ip${goto 155}${execi 3600 curl ifconfig.me }${color}
+${goto 15}|${goto 38}+-- ${color2}External Ip${goto 155}${exec curl ifconfig.me }${color}
 
 #${goto 15}|${goto 38}+-- ${color2}Up${color}  ${goto 155}${color4}${upspeedf wlp4s0}KB/s${color}
 #${goto 15}|${goto 38}+-- ${color2}Down${color}  ${goto 155}${color4}${downspeedf wlp4s0}KB/s${color}
@@ -131,7 +131,7 @@ ${goto 15}${downspeedgraph wlan0 30, 450 555555 AAAAAA -l}
 ${goto 12}${color1}+----Connections ${color}
 ${goto 15}|${goto 37} ${color2}In: ${tcp_portmon 1 32767 count}${offset 50} Out: ${tcp_portmon 32768 61000 count} ${alignr}Total: ${tcp_portmon 1 65535 count}
 ${color3}Process ${offset 20} L-port ${offset 20} R-Port ${alignr} Remote IP ${color}
-${texeci 30 netstat -anp | grep 'ESTABLISHED' | grep -v 'chromium\|steam\|spotify' | sed -r 's|.*192.[0-9.]+:([0-9]*)\s*([0-9.]+):([0-9]+)[^/]+/([a-zA-Z0-9]*)|\4 \2 \1 \3|' | awk '{printf("%-10s %-15s %5s %5s\n",$1,$2,$3,$4)}'}
+${texeci 30 netstat -anp | grep 'ESTABLISHED' | grep -v 'chromium\|steam\|spotify' | grep -v '127.0.0.1' | sed -r 's|.*192.[0-9.]+:([0-9]*)\s*([0-9.]+):([0-9]+)[^/]+/([a-zA-Z0-9]*)|\4 \2 \1 \3|' | awk '{printf("%-10s %-15s %5s %5s\n",$1,$2,$3,$4)}'}
 
 # ${goto 15}|${goto 38}+-- ${color3}${tcp_portmon 1 65535 rip 0}${alignr 1}${tcp_portmon 1 65535 rport 0}${color}
 # ${goto 15}|${goto 60}+-- ${color3}${tcp_portmon 1 65535 rip 1}${alignr 1}${tcp_portmon 1 65535 rport 1}${color}

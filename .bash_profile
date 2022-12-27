@@ -37,7 +37,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias diskspace="du -S | sort -n -r |more"
 alias grabcrons='journalctl -xe | grep CRON'
-#alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
+alias dedockify="docker run -v /var/run/docker.sock:/var/run/docker.sock --rm mrhavens/dedockify"
+alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
 #alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
 
 
@@ -114,8 +115,11 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 # P A T H
 ####################
 
-# P A T H
-PATH=/usr/local/bin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
+# Reset P A T H
+function reset_path {
+    export PATH=/usr/local/bin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
+}
+reset_path
 
 
 ####################
@@ -126,8 +130,6 @@ PATH=/usr/local/bin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
 PATH=$PATH:$HOME/.cargo/bin
 
 # P Y T H O N
-# Use .pythonrc
-export PYTHONSTARTUP=~/.pythonrc
 # Additional system-specific pyenv commands below
 if [ $(hostname) == "argo" ] || [ $(hostname) == "wei" ];
 then
@@ -178,6 +180,12 @@ export RSENSE_HOME=$HOME/pckges/rsense-0.3
 
 
 ####################
+# Services
+####################
+
+
+
+####################
 # Ricing
 ####################
 # if [ $(hostname) == "argo" ];
@@ -205,6 +213,7 @@ fi
 ####################
 # Amazon Web Services
 complete -C aws_completer aws
+# SystemD
 source /usr/share/bash-completion/completions/systemctl
 
 
@@ -219,7 +228,7 @@ source /usr/share/bash-completion/completions/systemctl
 PATH=$PATH:$HOME/edirect
 
 # Refgenie
-export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
+export REFGENIE=/ffast2/assemblies/refgenie/genomes.yml
 
 
 ####################
@@ -266,3 +275,4 @@ export GPG_TTY=$(tty)
 
 
 
+    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
