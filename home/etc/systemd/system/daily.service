@@ -1,0 +1,13 @@
+[Unit]
+Description=Create a daily timestamped todo list from template at /home/matt/dotfiles
+Wants=daily.timer
+
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cp /home/matt/Projects/orgs/daily.org /home/matt/daily-agenda.org
+User=matt
+
+
+[Install]
+WantedBy=multi-user.target

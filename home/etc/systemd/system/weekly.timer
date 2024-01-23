@@ -1,0 +1,10 @@
+[Unit]
+Description=Create weekly agenda
+
+[Timer]
+OnCalendar=Sat 8:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+

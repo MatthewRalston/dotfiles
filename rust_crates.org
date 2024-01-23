@@ -1,0 +1,6 @@
+# Rust Crates
+
+* Alacritty
+** cargo install alacritty
+* bottom
+** cargo install bottom

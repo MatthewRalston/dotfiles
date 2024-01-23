@@ -1,0 +1,13 @@
+[Unit]
+Description=Create a monthly timestamped todo list from template at /home/matt/dotfiles
+Wants=monthly.timer
+
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cp /home/matt/Projects/orgs/monthly.org /home/matt/monthly-agenda_$(date -I).org && emacs /home/matt/monthly-agenda_$(date -I).org
+User=matt
+
+
+[Install]
+WantedBy=multi-user.target

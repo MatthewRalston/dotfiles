@@ -1,0 +1,13 @@
+[Unit]
+Description=Create a weekly timestamped todo list from template at /home/matt/dotfiles
+Wants=weekly.timer
+
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cp /home/matt/Projects/orgs/weekly.org /home/matt/weekly-agenda_$(date -I).org && emacs /home/matt/weekly-agenda_$(date -I).org
+User=matt
+
+
+[Install]
+WantedBy=multi-user.target
