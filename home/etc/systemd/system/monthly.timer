@@ -1,0 +1,10 @@
+[Unit]
+Description=Create monthly agenda
+
+[Timer]
+OnCalendar=Sat *-*-1..7 8:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+

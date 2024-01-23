@@ -115,7 +115,7 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 ####################
 
 # P A T H
-PATH=/bin:/usr/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
+PATH=/usr/local/bin:/usr/sbin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
 
 
 ####################
@@ -127,22 +127,27 @@ PATH=$PATH:$HOME/.cargo/bin
 
 # P Y T H O N
 # Additional system-specific pyenv commands below
-if [ $(hostname) == "argo" ] || [ $(hostname) == "wei" ];
+if [ $(hostname) == "argo" ] || [ $(hostname) == "endurance2" ] || [ $(hostname) == "wei" ];
 then
    export PYENV_ROOT=$HOME/.pyenv
-   PATH=$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims
+   PATH=$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH
 fi
 
+
 eval "$(pyenv init -)"
-#eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
-#pyenv activate v2.7.10
+
 
 # L a T e X
 if [ $(hostname) == "argo" ];
 then
     PATH=$PATH:/opt/texlive/2021/bin/x86_64-linux
 fi
+
+
+# JAVA (for Neo4j)
+#JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
+#PATH="/usr/lib/jvm/jdk-11.0.8/bin:$PATH"
 
 
 # N O D E
@@ -233,14 +238,22 @@ export PATH
 if [ $(hostname) == "argo" ];
 then
     #bash $HOME/.profile.sh
+    cat $HOME/motd
     /bin/lolcat $HOME/.asciiowl.txt
     neofetch
     alias yay='paru'
     xmodmap ~/.xmodmap
     # Other bash environment variables
-    export TMPDIR=/storage/data/scratch
+    export TMPDIR=/mnt/tmp
     #export TMP=$TMPDIR
     #export TEMP
+elif [ $(hostname) == "endurance2" ];
+then
+    cat $HOME/motd
+    /usr/games/lolcat $HOME/.asciiowl.txt
+    xmodmap ~/.xmodmap
+    # Other bash environment variables
+    export TMPDIR=/mnt/tmp    
 elif [ $(hostname) == "wei" ];
 then
     /usr/local/bin/lolcat $HOME/.asciiowl.txt

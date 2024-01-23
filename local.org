@@ -1,0 +1,28 @@
+# Local environment tools
+* Pyenv
+** How does pyenv work?
+*** The accompanying .bash_profile sets PATH so that pyenv 'shims' is found before OS/system python
+*** Pyenv is just an installer for Python versions. May not be appropriate in some cases.
+*** Pyenv virtualenv also creates a *separate* pip site_packages location for project-specific library/module installs
+*** To use a project specific .venv, create a '.python-version' file with the name of your pyenv virtualenv!
+** pyenv-virtualenv
+*** Wrapper for virtualenv. Creates a '.venv' virtualenv at $HOME/.pyenv/versions/myversion
+** Commands:
+*** pyenv activate <venv>             | activate an existing virtualenv
+*** pyenv global <version>            | set the _global_ python version
+*** pyenv install -l                  | list available python versions (python, anconda, miniconda etc.)
+*** pyenv install <versions>          | install a specific python version (NOT A VIRTUALENV)
+*** pyenv virtualenv <version> <name> | use a specific virtualenv
+* RVM
+** How does rvm work?
+*** RVM allows for the creation of isolated 'gemsets' upon a specific ruby/rubinius version
+*** A gemset can be specific for a project, much like pyenv-virtualenv
+*** To use a project specific gemset, create a 'ruby-versions' file with the format <ruby-versions>@<gemset>
+** Commands:
+*** rvm current                | print the current ruby version and active gemset
+*** rvm list known             | list all available ruby versions
+*** rvm list                   | list installed ruby versions
+*** rvm install <ruby>         | install specific version
+*** rvm gemset create <name>   | create a gemset
+* 
+* 

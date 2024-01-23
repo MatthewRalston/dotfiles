@@ -1,9 +1,11 @@
 # This is Git's per-user configuration file.
+[gpg]
+	program = gpg2
 [user]
 # Please adapt and uncomment the following lines:
         name   = MatthewRalston
         email  = mrals89@gmail.com
-	signingkey = BF8E1465E7C91DBF
+	signingkey = 4283434292B71BC2862522BE04B11C2C4ABFB8D4
 [color]
         ui     = true
 [core]

@@ -1,0 +1,11 @@
+[Unit]
+Description=Create daily agenda
+Requires=createDailyTodo.service
+
+[Timer]
+OnCalendar=*-*-* 8:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
