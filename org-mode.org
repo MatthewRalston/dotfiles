@@ -33,15 +33,17 @@
       - [ ]        - Step 2.b: As subtasks are checked, they will eventually check the parent task (Step 2)
 *** C-C C-c        - Toggle checkbox
 ** Formatting (org-mode plain-text formatting)
-*** *Bold*
-*** /italic/
-*** _underline_
+*** *Bold* - emphasis or math symbol
+*** /italic/ - emphasis
+*** _underline_ - definition follows / special word
 *** =verbatim=
 *** +strikethrough+
 *** Example^{superscript}
 *** Example_{subscript}
 ** Formatting (LaTeX)
-*** C-c C-x C-l        - Use LaTeX to preview fragments
+*** C-c C-x C-l          - latexpreview of current selection (dvipng || imagemagick)
+*** C-u C-c C-x C-l      - preview everything in the subtree
+*** C-u C-u C-c C-x C-l  - to preview everything in the buffer)
 *** $$ Cov(X_{i}, X_{k}) = 0 $$ iff X_{i} and X_{k} are independent
 ** Source code blocks
 *** <s TAB

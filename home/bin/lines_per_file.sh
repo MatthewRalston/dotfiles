@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 
 source /home/matt/home/etc/optparse/optparse.bash
@@ -31,6 +31,8 @@ source $( optparse.build )
 if [ ! -f $input ]; then
     echo "File doesn't exist at provided path: '$input'" 1>&2
     exit 1
+else
+    echo "File '$input' is readable." 1>&2
 fi
 
 
@@ -43,9 +45,9 @@ fi
 # No options: --help
 ################################
 if [ $# -eq 0 ]; then
-    echo "Usage: lines_per_file.sh [-i|--input INPUT]" >2
-    echo "Options:" >2
-    echo "        -?|--help" >2
+    echo "Usage: lines_per_file.sh [-i|--input INPUT]" 1>&2
+    echo "Options:" 1>&2
+    echo "        -?|--help" 1>&2
     exit 1
 fi
 
@@ -95,9 +97,10 @@ fi
 # $ in sed means 'end of' loosely...
 
 
-
-#sed -n '$=' $input
+echo "sed -n '$=' $input" 1>&2
+sed -n '$=' $input
 
 
 # And finally:
-wc -l $input
+#echo "wc -l $input" 1>&2
+#wc -l $input
