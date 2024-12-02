@@ -6,7 +6,7 @@
 #+STARTUP: latexpreview
 #+OPTIONS: tex:t
 
-* Org-mode essentials
+* || Org-mode essentials ||
 :PROPERTIES:
 :TYPE:     Meta
 :END:
@@ -50,7 +50,7 @@
 *** #+BEGIN_SRC lang
 *** #+END_SRC
 *** C-c '        - Edit source block in buffer with major mode of language
-* Org-mode drawers/properties
+* || Org-mode drawers/properties||
   :PROPERTIES:
   :TYPE: Meta
   :END:
@@ -61,7 +61,7 @@
 :END:
 ** C-c C-x s        - Set property
 ** C-c C-x d        - Delete property
-* Org-agenda
+* || Org-agenda ||
 :PROPERTIES:
 :TYPE: Meta
 :END:
@@ -69,7 +69,7 @@
 ** Relies on aggregation from existing files defined in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]]
 ** Scheduled tasks will appear in agenda for current week/day
 ** Other tasks must be aggregated
-* Org-capture
+* || Org-capture ||
 CLOSED: [2021-12-27 Mon 17:33]
 :LOGBOOK:
 CLOCK: [2021-12-27 Mon 17:01]--[2021-12-27 Mon 17:01] =>  0:00
@@ -86,11 +86,12 @@ CLOCK: [2021-12-27 Mon 17:01]--[2021-12-27 Mon 17:01] =>  0:00
 ** C-c C-c      - Complete capture from template
 ** C-c C-w      - Refile between default agenda files
 *** Currently set in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]] under org-capture-templates
-**** ~/refile.org
-**** ~/tasks.org
+**** ~/Documents/orgs/refile.org
+**** ~/Documents/orgs/tasks.org
+**** ~/Documents/orgs/notes.org
 **** ~/Documents/orgs/roam/master.org
 ** Manually refile
-* Org-roam
+* || Org-roam ||
 :PROPERTIES:
 :TYPE:     Meta
 :END:
@@ -100,14 +101,14 @@ CLOCK: [2021-12-27 Mon 17:01]--[2021-12-27 Mon 17:01] =>  0:00
 :END:
 *** Currently set in [[~/.emacs.d/config_lisp_files/org-config.el][org-config.el]] under ;; org-roam "use-package" configuration
 Opens a new node file under the directory, allows you to put additional information
-* .org file structure
+* || .org file structure ||
 :PROPERTIES:
 :TYPE: Meta
 :END:
 ** Top level is main categories of descriptors only
 ** Projects and tasks begin at level 2
 
-* Org-mode workflow + org-capture
+* || Org-mode workflow + org-capture ||
 :PROPERTIES:
 :TYPE:     Meta
 :END:

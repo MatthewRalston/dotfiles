@@ -57,6 +57,24 @@ function knit() {
     R -e "rmarkdown::render('$1', pdf_document(), params=list())"
 } # M-x polymode-set-exporter while in poly-markdown+r-mode
 
+function rsync_develop() {
+    rsync -vrltA /develop/projects /ffast/matt/prj
+}
+
+function friendlyrsync() {
+    if [ ${2: -1} == "/" ];
+    then
+       # https://stackoverflow.com/q/17542892 (C) CC-5.0
+	   rsync -vrltAUt $1 $2
+    else
+	echo "FATAL ERROR: Did you forget youre trailing backslashes?"
+    fi
+}
+
+
+
+
+
 alias ll='ls -h ${LS_OPTS}'
 #Shows hidden files such as bashrc
 alias la='ls -A'
@@ -69,6 +87,9 @@ alias cmus='cmus --listen 0.0.0.0'
 alias grep='grep --color=auto'
 #alias psgrep='ps aux | grep'
 alias please='sudo $(history -p \!\!)'
+
+alias switch_control='setxkbmap -option caps:ctrl_modifier'
+
 alias RELOAD=". ~/.bash_profile"
 alias REMAP="xmodmap ~/.xmodmap"
 alias sortbysize="ls -s | sort -n" # Sorts files by size
@@ -118,6 +139,9 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 PATH=/usr/local/bin:/usr/sbin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
 
 
+# NVIDIA CUDA
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 ####################
 # L a n g u a g e s
 ####################
@@ -127,15 +151,16 @@ PATH=$PATH:$HOME/.cargo/bin
 
 # P Y T H O N
 # Additional system-specific pyenv commands below
-if [ $(hostname) == "argo" ] || [ $(hostname) == "endurance2" ] || [ $(hostname) == "wei" ];
+if [ $(hostname) == "argo" ] || [ $(hostname) == "Dend3" ] || [ $(hostname) == "wei" ];
 then
    export PYENV_ROOT=$HOME/.pyenv
    PATH=$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH
+   eval "$(pyenv init -)"
+   eval "$(pyenv virtualenv-init -)"
+
 fi
 
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 
 # L a T e X
@@ -166,10 +191,10 @@ export PS1="$($HOME/.gitmode.sh --start)"
 
 # R U B Y
 export RVM=$HOME/.rvm
-export RUBY221=$RVM/rubies/ruby-2.2.1
-export RUBY=$RUBY221/bin
+#export RUBY221=$RVM/rubies/ruby-2.2.1
+#export RUBY=$RUBY221/bin
 #export RUBY_GEMS=$RVM/gems/ruby-2.2.1/bin
-export GEM_HOME=$RUBY221/lib/ruby/gems/2.2.0
+#export GEM_HOME=$RUBY221/lib/ruby/gems/2.2.0
 PATH=$RUBY:$PATH
 export RSENSE_HOME=$HOME/pckges/rsense-0.3
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -223,7 +248,7 @@ export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
 ####################
 ## export PATH
 ####################
-export PATH
+export PATH=$PATH
 
 
 
@@ -247,13 +272,26 @@ then
     export TMPDIR=/mnt/tmp
     #export TMP=$TMPDIR
     #export TEMP
-elif [ $(hostname) == "endurance2" ];
+elif [ $(hostname) == "Dend3" ];
 then
     cat $HOME/motd
     /usr/games/lolcat $HOME/.asciiowl.txt
     xmodmap ~/.xmodmap
+
+    # Wayland Caps Lock switch
+    setxkbmap -option caps:ctrl_modifier
+
+
+    # CUDA / AUTODOCK-VINA
+    # find / -type d -name 'cuda*' 2> /dev/null
+    export GPU_INCLUDE_PATH=/usr/lib/x86_64-linux-gnu/cuda-gdb
+    export GPU_LIBRARY_PATH=/usr/include/cuda-gdb
+
+    
+    neofetch
+    export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux
     # Other bash environment variables
-    export TMPDIR=/mnt/tmp    
+    export TMPDIR=/mnt/tmp
 elif [ $(hostname) == "wei" ];
 then
     /usr/local/bin/lolcat $HOME/.asciiowl.txt
