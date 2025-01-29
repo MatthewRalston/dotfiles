@@ -1,0 +1,12 @@
+[Unit]
+Description=Create backup
+Requires=createDailyTodo.service
+
+[Timer]
+#OnCalendar=*-*-* 8:00:00
+OnCalendar=monthly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
