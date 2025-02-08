@@ -1,0 +1,15 @@
+version = "0.1.0"
+edition = "2021"
+authors = ["Matt Ralston <professional.bio.coder@gmail.com"]
+
+
+
+# Use Curl to boostrap rustup on your system. Will install cargo, rustc latest stable version.
+# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+[dependencies]
+rust_tree = "0.1.4" # tree -s -L 2 # prints -L 2 levels, with -s file sizes
+ripgrep = "14.1.1"
+btm = "0.10.1"
+alacritty = "0.15.0"
+
+

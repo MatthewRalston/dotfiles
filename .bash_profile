@@ -136,7 +136,8 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 ####################
 
 # P A T H
-PATH=/usr/local/bin:/usr/sbin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin
+reset_path # See .functions.sh for details
+
 
 
 # NVIDIA CUDA
@@ -146,10 +147,15 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # L a n g u a g e s
 ####################
 
-# R U S T
+# rust
+# ---------------------
 PATH=$PATH:$HOME/.cargo/bin
+. "$HOME/.cargo/env"
+
+
 
 # P Y T H O N
+# --------------------
 # Additional system-specific pyenv commands below
 if [ $(hostname) == "argo" ] || [ $(hostname) == "Dend3" ] || [ $(hostname) == "wei" ];
 then
@@ -175,7 +181,11 @@ fi
 #PATH="/usr/lib/jvm/jdk-11.0.8/bin:$PATH"
 
 
-# N O D E
+# node.js
+# ---------------------
+
+# NVM (node version manager)
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -305,6 +315,7 @@ then # If not, assume using a window manager and manually remap keys via xmodmap
 fi
 
 export GPG_TTY=$(tty)
+
 
 
 
