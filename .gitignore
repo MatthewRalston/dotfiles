@@ -1,1 +1,10 @@
 .pypirc
+.emacs.d/auto-save-list/,
+.emacs.d/org-clock-save.el,
+.emacs.d/org-roam.db,
+.emacs.d/recentf
+.emacs.d/history,
+.emacs.d/auto-save-list/,
+.emacs.d/org-clock-save.el,
+.emacs.d/org-roam.db,
+.emacs.d/recentf

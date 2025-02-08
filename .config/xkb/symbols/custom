@@ -1,0 +1,3 @@
+xkb_symbols "caps_as_ctrl" {
+    key <CAPS> { [ Control_L ] };
+};
