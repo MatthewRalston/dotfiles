@@ -35,7 +35,7 @@
        '((alpha . 95)))
 
 
-(use-package golden-ratio-mode)
+;;(use-package golden-ratio-mode)
 
 
 ;;Time @goapl/.emacs.d on Github

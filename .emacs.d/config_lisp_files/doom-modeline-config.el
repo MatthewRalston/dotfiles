@@ -5,9 +5,9 @@
 
 
 
-(use-package nerd-icons
-  (nerd-icons-font-family "Symbols Nerd Font Mono")
-  )
+(use-package nerd-icons)
+  ;; ('nerd-icons-font-family "Symbols Nerd Font Mono")
+  ;; )
 ;; (use-package all-the-icons
 ;;   :ensure t
 ;;   )
@@ -38,7 +38,7 @@
   ;;  (load-theme 'doom-city-lights)
   ;; (load-theme 'doom-dracula)
   ;; (load-theme 'doom-ayu-dark)
-  (load-theme 'doom-ayu-mirage)
+  (load-theme 'doom-ayu-mirage :no-confirm)
     
 
 
