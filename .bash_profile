@@ -201,13 +201,14 @@ export PS1="$($HOME/.gitmode.sh --start)"
 
 # R U B Y
 export RVM=$HOME/.rvm
-#export RUBY221=$RVM/rubies/ruby-2.2.1
-#export RUBY=$RUBY221/bin
-#export RUBY_GEMS=$RVM/gems/ruby-2.2.1/bin
-#export GEM_HOME=$RUBY221/lib/ruby/gems/2.2.0
-PATH=$RUBY:$PATH
-export RSENSE_HOME=$HOME/pckges/rsense-0.3
+ruby_version="ruby-3.4.0-preview1"
+export RUBY=$RVM/rubies/$ruby_version/bin
+#export RUBY_GEMS=$RVM/gems/$ruby_version/bin
+export GEM_HOME=$RVM/gems/$ruby_version
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH=$RUBY:$RUBY_GEMS:$PATH
+#export RSENSE_HOME=$HOME/pckges/rsense-0.3
+
 
 
 ####################
@@ -249,7 +250,7 @@ source /usr/share/bash-completion/completions/systemctl
 # NCBI/Entrez utilities
 # Download SRA-tools binaries
 # Download Entrez Direct https://www.ncbi.nlm.nih.gov/books/NBK179288/
-PATH=$PATH:$HOME/edirect
+#PATH=$PATH:$HOME/edirect
 
 # Refgenie
 export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
@@ -258,7 +259,7 @@ export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
 ####################
 ## export PATH
 ####################
-export PATH=$PATH
+#export PATH=$PATH
 
 
 
@@ -282,10 +283,10 @@ then
     export TMPDIR=/mnt/tmp
     #export TMP=$TMPDIR
     #export TEMP
-elif [ $(hostname) == "Dend3" ];
+elif [ $(hostname) == "Dend3" ] || [ $(hostname) == "endurance" ];
 then
     cat $HOME/motd
-    /usr/games/lolcat $HOME/.asciiowl.txt
+    lolcat $HOME/.asciiowl.txt # rvm + gem install lolcat
     xmodmap ~/.xmodmap
 
     # Wayland Caps Lock switch
