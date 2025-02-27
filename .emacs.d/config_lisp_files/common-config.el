@@ -11,6 +11,15 @@
 (require 'package)
 ;;(package-initialize)
 
+;; Transparency
+(setq default-frame-alist
+       '((alpha . 95)))
+
+
+;; Split windows on system startup
+(load "splitwindows_startup.el")
+(four-window-split-custom)
+
 ; IDO mode
 (require 'ido)
 (ido-mode t)
@@ -28,11 +37,6 @@
 (setq flyspell-issue-welcome-flag nil)
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
-
-
-;; Transparency
-(setq default-frame-alist
-       '((alpha . 95)))
 
 
 ;;(use-package golden-ratio-mode)
@@ -54,7 +58,7 @@
     ("Asia/Tokyo" "Tokyo"))))
 
 ;; Manual install of org-mode 9.8-pre
-(add-to-list 'load-path "~/Projects/org-mode/lisp/")
+;;(add-to-list 'load-path "~/Projects/org-mode/lisp/")
 ;; Fonts
 ;;(add-to-list 'default-frame-alist
 ;;             '(font . "Iosevka Term-12"))
@@ -71,3 +75,7 @@
 :hook (after-init . gcmh-mode)
 :custom
 (gc-cons-percentage .9))
+
+
+;; 
+
