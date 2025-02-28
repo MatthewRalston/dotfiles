@@ -5,7 +5,7 @@ Wants=weekly.timer
 [Service]
 Type=simple
 Environment=JOURNALDIR=/ffast/Documents/orgs/journal
-ExecStart=/bin/bash -c 'find $JOURNALDIR -empty -type f -delete'
+ExecStart=/bin/bash -c "for f in $(grep -l 'DELETEME' $JOURNALDIR/*.md); do if [ ! -h "$f" ]; then rm $f; fi; done;"
 User=matt
 
 [Install]

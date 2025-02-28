@@ -1,0 +1,12 @@
+[Unit]
+Description=Create a new template journal entry
+Wants=daily.timer
+
+[Service]
+Type=simple
+Environment=JOURNALDIR=/ffast/Documents/orgs/journal
+ExecStart=/bin/bash -c "cp /develop/repos/journal/template_daily_journal.md $JOURNALDIR/daily_journal_$(date -I).md && $(rm $JOURNALDIR/current.md || true) && ln -s $JOURNALDIR/daily_journal_$(date -I).md $JOURNALDIR/current.md"
+User=matt
+
+[Install]
+WantedBy=multi-user.target
