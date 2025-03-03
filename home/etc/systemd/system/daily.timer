@@ -1,6 +1,6 @@
 [Unit]
 Description=Create daily agenda
-Requires=createDailyTodo.service
+Requires=journal.service
 
 [Timer]
 OnCalendar=*-*-* 8:00:00
