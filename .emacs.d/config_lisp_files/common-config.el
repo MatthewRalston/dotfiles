@@ -17,7 +17,7 @@
 
 
 ;; Split windows on system startup
-(load "splitwindows_startup.el")
+(load "startup_splitwindows.el")
 (four-window-split-custom)
 
 ; IDO mode
