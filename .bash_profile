@@ -1,29 +1,21 @@
 #set -x
 ##
 
-
-
-
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PERL5LIB="$HOME/SourceCache/bioperl-live"
 #:$PERL5LIB"
 
-
 # Choose Default editor
 export VISUAL=emacs
 export EDITOR="$VISUAL"
 source ~/.functions.sh
-#source ~/.profile
+source ~/.profile
 #source ~/.bashrc
-
-
-
 
 ####################
 # Alias / var exports
 ####################
-
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
@@ -35,11 +27,14 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+
+alias today="date -I"
+alias now="date -Iseconds | sed 's/\ /_/g' | sed 's/\:/-/g' | sed 's/-04-00//g'"
 alias diskspace="du -S | sort -n -r |more"
 alias grabcrons='journalctl -xe | grep CRON'
 #alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
 #alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
-
 
 # Shows even more permissions
 lsd () {
@@ -48,6 +43,10 @@ lsd () {
 lsf () {
     ls -alF "$@" | grep -v /$
 }
+remove_bell () {
+    export BELL=0;
+}
+
 
 function chkplz () {
     find $1 -type f -exec md5sum {} + | grep "^$2"
@@ -71,10 +70,6 @@ function friendlyrsync() {
     fi
 }
 
-
-
-
-
 alias ll='ls -h ${LS_OPTS}'
 #Shows hidden files such as bashrc
 alias la='ls -A'
@@ -94,8 +89,6 @@ alias RELOAD=". ~/.bash_profile"
 alias REMAP="xmodmap ~/.xmodmap"
 alias sortbysize="ls -s | sort -n" # Sorts files by size
 alias topcommands="echo 'Top commands:' && history | tr -s ' ' | cut -d ' ' -f 3 | sort | uniq -c | sort -n -r"
-
-
 
 # COLORS!!
 export TERM=xterm-256color
@@ -123,13 +116,9 @@ export COLOR_LIGHT_GRAY='\e[0;37m'
 export UC=$COLOR_YELLOW               # user's color
 [ $UID -eq "0" ] && export UC=$COLOR_RED   # root's color
 
-
 # A W S
 #export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.7.5.1
 export EC2_URL=https://ec2.us-east-1.amazonaws.com
-
-
-
 
 ####################
 # P A T H
@@ -137,8 +126,6 @@ export EC2_URL=https://ec2.us-east-1.amazonaws.com
 
 # P A T H
 reset_path # See .functions.sh for details
-
-
 
 # NVIDIA CUDA
 export PATH=/usr/local/cuda/bin:$PATH
@@ -152,8 +139,6 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 PATH=$PATH:$HOME/.cargo/bin
 . "$HOME/.cargo/env"
 
-
-
 # P Y T H O N
 # --------------------
 # Additional system-specific pyenv commands below
@@ -166,20 +151,15 @@ then
 
 fi
 
-
-
-
 # L a T e X
-if [ $(hostname) == "argo" ];
+if [ $(hostname) == "argo" ] || [ $(hostname) == "Dend3" ];
 then
-    PATH=$PATH:/opt/texlive/2021/bin/x86_64-linux
+    PATH=$PATH:/usr/local/texlive/2025/bin/x86_64-linux
 fi
-
 
 # JAVA (for Neo4j)
 #JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 #PATH="/usr/lib/jvm/jdk-11.0.8/bin:$PATH"
-
 
 # node.js
 # ---------------------
@@ -190,25 +170,24 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-
-
 # Terminal prompt
 export PS1="$($HOME/.gitmode.sh --start)"
 ##export PS1="\[${UC}\]\u@\h: \[${COLOR_GREEN}\]\$($HOME/.gitmode.sh --start)| \[${COLOR_LIGHT_CYAN}\]\w >"
 
 #PS1="$TITLEBAR\n\[${UC}\]\u \[${COLOR_LIGHT_BLUE}\]\${PWD} \[${COLOR_BLACK}\]\$(gitmode --start) \n\[${COLOR_LIGHT_GREEN}\]→\[${COLOR_NC}\] "
 
-
 # R U B Y
 export RVM=$HOME/.rvm
-ruby_version="ruby-3.4.0-preview1"
+# In .profile
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+#ruby_version="ruby-3.3.7"
+ruby_version=$(rvm list default string)
 export RUBY=$RVM/rubies/$ruby_version/bin
 #export RUBY_GEMS=$RVM/gems/$ruby_version/bin
 export GEM_HOME=$RVM/gems/$ruby_version
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PATH=$RUBY:$RUBY_GEMS:$PATH
+export PATH=$GEM_HOME/bin:$RUBY:$PATH
 #export RSENSE_HOME=$HOME/pckges/rsense-0.3
-
 
 
 ####################
@@ -221,9 +200,6 @@ export PATH=$RUBY:$RUBY_GEMS:$PATH
 #     POWERLINE_BASH_SELECT=1
 #     . /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 # fi
-
-
-
 
 ####################
 # Databases
@@ -241,8 +217,6 @@ fi
 complete -C aws_completer aws
 source /usr/share/bash-completion/completions/systemctl
 
-
-
 ####################
 ## Other
 ####################
@@ -255,29 +229,28 @@ source /usr/share/bash-completion/completions/systemctl
 # Refgenie
 export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
 
-
 ####################
 ## export PATH
 ####################
 #export PATH=$PATH
 
-
-
-
 ####################
 ## System-specific
 ####################
-
 
 # ASCII Owl and friends
 
 if [ $(hostname) == "argo" ];
 then
     #bash $HOME/.profile.sh
-    cat $HOME/motd
-    /bin/lolcat $HOME/.asciiowl.txt
     neofetch
-    alias yay='paru'
+    lolcat $HOME/motd
+    lolcat $HOME/.asciiowl.txt
+    
+    grep -A 12 "affirmations" /develop/repos/journal/template_daily_journal.md
+    
+    echo "Grep process: $?"
+
     xmodmap ~/.xmodmap
     # Other bash environment variables
     export TMPDIR=/mnt/tmp
@@ -285,22 +258,26 @@ then
     #export TEMP
 elif [ $(hostname) == "Dend3" ] || [ $(hostname) == "endurance" ];
 then
-    cat $HOME/motd
-    lolcat $HOME/.asciiowl.txt # rvm + gem install lolcat
+
+    neofetch
+    lolcat $HOME/motd
+    lolcat $HOME/.asciiowl.txt
+
+    # Uses Rust crate 'bat'
+    grep -A 12 "affirmations" /develop/repos/journal/template_daily_journal.md | bat -l md --file-name "You can do this!"
+
+    # Traditional x11 keybinding switch caps-lock -> ctrl
     xmodmap ~/.xmodmap
 
     # Wayland Caps Lock switch
     setxkbmap -option caps:ctrl_modifier
-
 
     # CUDA / AUTODOCK-VINA
     # find / -type d -name 'cuda*' 2> /dev/null
     export GPU_INCLUDE_PATH=/usr/lib/x86_64-linux-gnu/cuda-gdb
     export GPU_LIBRARY_PATH=/usr/include/cuda-gdb
 
-    
-    neofetch
-    export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux
+    #export PATH=$GEM_HOME/bin:$RUBY:$PATH
     # Other bash environment variables
     export TMPDIR=/mnt/tmp
 elif [ $(hostname) == "wei" ];
@@ -316,9 +293,6 @@ then # If not, assume using a window manager and manually remap keys via xmodmap
 fi
 
 export GPG_TTY=$(tty)
-
-
-
 
 
 
