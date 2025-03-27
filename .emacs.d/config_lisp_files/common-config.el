@@ -13,7 +13,7 @@
 
 ;; Transparency
 (setq default-frame-alist
-       '((alpha . 95)))
+       '((alpha . 90)))
 
 
 ;; Split windows on system startup
@@ -38,6 +38,28 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+(defun add-hover-image (linktext caption imagepath &optional link)
+  "Generate a HTML5 hover feature over a link."
+  (interactive "MLink text: \nMCaption: \nFImagepath:\nMlink:\n")
+  (if (not (string= "" link))
+      (url-copy-file link imagepath))
+  (insert (concat (format "<span class=\"hover-image-container\"><a href=\"#\">%s</a><span class=\"hover-image-wrapper\"><img class=\"hover-image\" src=\"/assets/img/%s" linktext (file-name-nondirectory imagepath))
+		  "\" alt=\"Hover image\"/><span class=\"image-caption\">"
+		  caption
+   "</span></span></span>")))
+
+
+
+(defun add-hover-video (linktext caption videoid &optional startat)
+  " Generate a hovering youtube video. Creates a card that will allow playback if the user clicks on the youtube play button. Will not autoplay on hover. This is more user friendly than previous iterations."
+  (interactive "MLink text: \nMCaption: \nMYoutube query \?v=: \nMStart at (optional): \n")
+  (insert (concat (format "<span class=\"hover-video-container\"><a href=\"#\">%s</a><span class=\"hover-video-wrapper\"><iframe class=\"youtube-frame\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s?autoplay=1&start=%s\" title=\"Youtube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe><span class=\"video-caption\">" linktext videoid startat)
+		  caption
+		  "</span></span></span>"))
+)
+    
+
+
 
 ;;(use-package golden-ratio-mode)
 
@@ -56,6 +78,9 @@
     ("America/New_York" "New York")
     ("America/Halifax" "Nova Scotia")
     ("Asia/Tokyo" "Tokyo"))))
+
+
+
 
 ;; Manual install of org-mode 9.8-pre
 ;;(add-to-list 'load-path "~/Projects/org-mode/lisp/")

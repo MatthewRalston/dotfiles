@@ -3,15 +3,20 @@
 	program = gpg2
 [user]
 # Please adapt and uncomment the following lines:
-        name   = MatthewRalston
-        email  = mrals89@gmail.com
-	signingkey = 4283434292B71BC2862522BE04B11C2C4ABFB8D4
+        name   = Matthew Ralston
+        email  = mralston.development@gmail.com
+	signingkey = A9160A4F251A604C
+
+
 [color]
         ui     = true
 [core]
         editor = emacs
 [alias]
 	amen = commit --amend --no-edit
+	#resign-all-commits = git -c core.editor=':' rebase -i --root --exec 'env GIT_AUTHOR_DATE="$(git log --no-walk --format=%ad)" GIT_COMMITTER_DATE="$(git log --no-walk --format=%cd)" git commit --amend --allow-empty --no-edit --no-verify -S --reset-author'
+	resign-all = git rebase -r --root --exec "git commit --amend --no-edit --reset-author"
+	resign-authored-commits = !/bin/bash /home/matt/home/bin/resign_authored_commits.sh
 [commit]
 	gpgsign = true
 [init]

@@ -129,7 +129,9 @@ reset_path # See .functions.sh for details
 
 # NVIDIA CUDA
 export PATH=/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/:/usr/x86_64-linux-gnu/lib/:/usr/local/lib:$LD_LIBRARY_PATH
+#export LDFLAGS='-L/usr/lib'
+#export CFLAGS=/usr/include/x86_64-linux-gnu/openssl
 ####################
 # L a n g u a g e s
 ####################
@@ -264,13 +266,15 @@ then
     lolcat $HOME/.asciiowl.txt
 
     # Uses Rust crate 'bat'
-    grep -A 12 "affirmations" /develop/repos/journal/template_daily_journal.md | bat -l md --file-name "You can do this!"
+    grep -A 12 "affirmations" /develop/repos/journal/template_daily_journal.md | bat -P --style plain -l md --file-name "You can do this!"
 
     # Traditional x11 keybinding switch caps-lock -> ctrl
-    xmodmap ~/.xmodmap
+    #xmodmap ~/.xmodmap
 
     # Wayland Caps Lock switch
-    setxkbmap -option caps:ctrl_modifier
+    # No longer used. Use input-remapper-gtk
+    # See https://github.com/sezanzeb/input-remapper/blob/HEAD/readme/usage.md
+    #setxkbmap -option caps:ctrl_modifier
 
     # CUDA / AUTODOCK-VINA
     # find / -type d -name 'cuda*' 2> /dev/null

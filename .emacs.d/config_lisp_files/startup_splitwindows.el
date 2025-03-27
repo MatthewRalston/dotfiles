@@ -55,11 +55,10 @@
 (defun four-window-split-custom ()
   "Bring back 3x3 window configuration with my favorite buffers."
   (interactive)
-  (split-window-multiple-ways 2 2)
+  (split-window-multiple-ways 2 0)
   (set-window-buffer-in-frame 0 0 (find-file (file-truename "/ffast/Documents/orgs/journal/current.md")))
   (set-window-buffer-in-frame 1 0 (find-file-noselect "/ffast/Documents/orgs/workflow.org"))
-  (set-window-buffer-in-frame 0 1 (get-buffer "*info*"))
-  (set-window-buffer-in-frame 1 1 (get-buffer "*scratch*"))
-  
+;;  (set-window-buffer-in-frame 0 1 (get-buffer "*info*"))
+;;  (set-window-buffer-in-frame 1 1 (get-buffer "*scratch*"))
   )
 

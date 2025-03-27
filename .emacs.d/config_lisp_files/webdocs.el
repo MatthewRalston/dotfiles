@@ -1,5 +1,6 @@
 (require 'web-mode)
 (require 'ac-html)
+
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -9,34 +10,40 @@
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
 
-(defun add-popover-img (linktext caption imagepath &optional link)
-  " Generate an html popover.
-  -- Download an image file to the blog's image folder
-  -- Generate a popover link at the current position
-"
+
+(defun add-hover-image (linktext caption imagepath &optional link)
+  "Generate a HTML5 hover feature over a link."
   (interactive "MLink text: \nMCaption: \nFImagepath:\nMlink:\n")
   (if (not (string= "" link))
       (url-copy-file link imagepath))
-  (insert (concat (format "<a href=\"#\" title=\"%s\" data-toggle=\"popover\" data-placement=\"auto\" data-trigger=\"hover\" data-html=true data-content='<img src=\"img/%s\" " caption (file-name-nondirectory imagepath))
-		  "height=\"100%\" width=\"100%\" />'>"
-		  linktext
-		  "</a>")))
+  (insert (concat (format "<div class=\"hover-image-container\">
+  <a href=\"#\">%s</a>
+  <div class=\"hover-image-wrapper\">
+    <img class=\"hover-image\" src=\"%s" linktext (file-name-nondirectory imagepath))
+		  "\" alt=\"Hover image\"/>
+    <div class=\"image-caption\">"
+		  caption
+		  "</div>
+        </div>
+    </div>")))
 
-(defun add-popover-video (linktext videoid)
-  "Generate a popover youtube video
-  -- Link a youtube video to your text
-  -- Generate a popover video link at the current position
-  -- Remember to add any additional url '?start=2' parameters to the link afterwards, I'm too lazy to code that right now.
-"
-  (interactive "MLink text: \nMhtttps://youtube.com/watch?v= (with start query param): \n")
-  (insert (concat "<a href=\"#\" data-toggle=\"popover\" title=\"\" data-placement=\"auto\" data-trigger=\"hover\" data-html=true data-content='<iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/"
-		  videoid
-		  (if (string-match-p (regexp-quote "?") videoid)
-		      "&autoplay=1"
-		    "?autoplay=1")
-		  "\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>'>"
-		  linktext
-		  "</a>")))
+
+
+(defun add-hover-video (linktext caption videoid &optional startat)
+  " Generate a hovering youtube video. Creates a card that will allow playback if the user clicks on the youtube play button. Will not autoplay on hover. This is more user friendly than previous iterations."
+  (interactive "MLink text: \nMCaption: \nMYoutube video link: \nStart at (optional): \n")
+  (insert (concat (format "<div class=\"hover-image-container\">
+  <a href=\"#\">%s</a>
+  <div class=\"hover-image-wrapper\">
+  <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s?autoplay=1&%s\" title=\"Youtube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>
+  <div class=\"image-caption\"" linktext videoid startat)
+		  caption
+		  "</div>
+               </div>
+            </div>"))
+)
+    
+
 
 ;; (defun setup-ac-for-html ()
 ;;   ;; Require ac-haml since we are setup haml auto completion

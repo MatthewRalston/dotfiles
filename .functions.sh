@@ -21,8 +21,12 @@ echo -e "\n\n.functions.sh loaded...\n\n"
 
 function play_random_rune_sound {
     #BELL=$1
-    echo "playing rune sound..." >&2
-    echo "BELL value is $BELL..." >&2
+
+
+
+    # DEBUG options
+    #echo "playing rune sound..." >&2
+    #echo "BELL value is $BELL..." >&2
 
     if [[ $BELL == 1 ]]; then
 	# Silent
@@ -32,6 +36,6 @@ function play_random_rune_sound {
     else
 	echo "Refusing to play rune sounds..." >&2
     fi
-    echo "Done" >&2
+    #echo "Done" >&2
 }
 export -f play_random_rune_sound

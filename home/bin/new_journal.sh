@@ -31,5 +31,8 @@ if [ ! -f "$JOURNAL_DIR/daily_journal_${today}.md" ]; then
     cp $TEMPLATE_DIR/template_daily_journal.md $JOURNAL_DIR/daily_journal_${today}.md
     # Recreate the symlink
     ln -s $JOURNAL_DIR/daily_journal_${today}.md $JOURNAL_DIR/current.md
+else
+    echo "Refusing to make new journal entry... existing journal file found: '$JOURNAL_DIR/daily_journal_${today}.md'" >&2
+    exit 1
 fi
 
