@@ -16,7 +16,7 @@
 # Date: 1/22/24
 # Description: Create a new journal entry
 
-TEMPLATE_DIR=/develop/repos/journal
+TEMPLATE_DIR=/develop/repos/journal/journal_templates
 JOURNAL_DIR=/ffast/Documents/orgs/journal
 
 today=$(date -I)
@@ -28,7 +28,7 @@ if [ ! -f "$JOURNAL_DIR/daily_journal_${today}.md" ]; then
     # Remove current journal symlink
     rm $JOURNAL_DIR/current.md || true;
     # Copy the template at the current date
-    cp $TEMPLATE_DIR/template_daily_journal.md $JOURNAL_DIR/daily_journal_${today}.md
+    cp $TEMPLATE_DIR/template_daily_journal2.md $JOURNAL_DIR/daily_journal_${today}.md
     # Recreate the symlink
     ln -s $JOURNAL_DIR/daily_journal_${today}.md $JOURNAL_DIR/current.md
 else
