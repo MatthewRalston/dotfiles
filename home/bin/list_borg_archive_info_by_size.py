@@ -1,4 +1,3 @@
-
 #!/bin/env python3
 
 
@@ -62,7 +61,7 @@ def run_borg_info(borg_repo_path: str):
 
     
     # Print header
-    print("\t".join(("Archive name", "fingerprint", "hostname", "username", "original size", "compressed size", "dedup size", )))
+    print("\t".join(("Archive_name", "fingerprint", "hostname", "username", "original_size", "compressed_size", "deduplicated_size", )))
 
     
     for archive_stdout_details in stdout_list:
@@ -109,9 +108,9 @@ def run_borg_info(borg_repo_path: str):
 
 def main():
 
+    print("Do not run as sudo")
+    print("Usage:\n\n\nlist_borg_info_by_size.py BORG_REPO_PATH")
     
-
-
     if len(sys.argv) != 2:
         print(sys.argv)
         raise ValueError("Invalid arguments supplied. 1 positional argument required: borg repo filepath.\n\nUsage: list_borg_archive_info_by_size.py BORG_REPO_PATH")

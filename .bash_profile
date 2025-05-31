@@ -31,6 +31,7 @@ alias .....='cd ../../../..'
 
 alias today="date -I"
 alias now="date -Iseconds | sed 's/\ /_/g' | sed 's/\:/-/g' | sed 's/-04-00//g'"
+alias stayon="xset -dmps"
 alias diskspace="du -S | sort -n -r |more"
 alias grabcrons='journalctl -xe | grep CRON'
 #alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
@@ -249,16 +250,16 @@ then
     lolcat $HOME/motd
     lolcat $HOME/.asciiowl.txt
     
-    grep -A 12 "affirmations" /develop/repos/journal/template_daily_journal.md
+    grep -A 12 "affirmations" /develop/repos/journal/journal_templates/template_daily_journal.md
     
     echo "Grep process: $?"
 
     xmodmap ~/.xmodmap
     # Other bash environment variables
-    export TMPDIR=/mnt/tmp
+    export TMPDIR=/tmp
     #export TMP=$TMPDIR
     #export TEMP
-elif [ $(hostname) == "Dend3" ] || [ $(hostname) == "endurance" ];
+elif [ $(hostname) == "end4" ] || [ $(hostname) == "endurance" ];
 then
 
     neofetch
@@ -266,7 +267,7 @@ then
     lolcat $HOME/.asciiowl.txt
 
     # Uses Rust crate 'bat'
-    grep -A 12 "affirmations" /develop/repos/journal/template_daily_journal.md | bat -P --style plain -l md --file-name "You can do this!"
+    grep -A 12 "affirmations" /develop/repos/journal/journal_templates/template_daily_journal.md | bat -P --style plain -l md --file-name "You can do this!"
 
     # Traditional x11 keybinding switch caps-lock -> ctrl
     #xmodmap ~/.xmodmap
@@ -274,12 +275,15 @@ then
     # Wayland Caps Lock switch
     # No longer used. Use input-remapper-gtk
     # See https://github.com/sezanzeb/input-remapper/blob/HEAD/readme/usage.md
-    #setxkbmap -option caps:ctrl_modifier
+    setxkbmap -option caps:ctrl_modifier
 
     # CUDA / AUTODOCK-VINA
     # find / -type d -name 'cuda*' 2> /dev/null
     export GPU_INCLUDE_PATH=/usr/lib/x86_64-linux-gnu/cuda-gdb
     export GPU_LIBRARY_PATH=/usr/include/cuda-gdb
+
+    # sudo tune2fs -O ^has_journal /dev/sda4 # Remove journaling from volume
+    # xset -dpms # turn-off energy star settings to prevent screen timeout
 
     #export PATH=$GEM_HOME/bin:$RUBY:$PATH
     # Other bash environment variables
@@ -292,8 +296,11 @@ then
 fi
 
 if [[ -z $XDG_CURRENT_DESKTOP ]]; # Check if currentl using a XDG-compatible desktop environment
+
 then # If not, assume using a window manager and manually remap keys via xmodmap
-    xmodmap ~/.xmodmap
+    #xmodmap ~/.xmodmap
+    echo "Not a XDG-compatible DE..." >&2
+   export XDG_CONFIG_HOME=$HOME/.config
 fi
 
 export GPG_TTY=$(tty)
