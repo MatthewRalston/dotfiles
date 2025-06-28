@@ -2,12 +2,12 @@
 
 
 
-
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 ;;             J  E  D  I        M  O  D  E
 
-;;(add-hook 'python-mode-hook 'jedi:setup)
-;;(setq jedi:complete-on-dot t)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 ;;                     T H O U G H T B O T
 (defvar local-packages '(projectile auto-complete epc jedi))

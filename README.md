@@ -7,16 +7,45 @@ Clone the repository, copy the `.config` and `.emacs.d` directories, and other f
 
 ## Desktop Environment
 
-I typically use Cinnamon as my DE, with optional `bspwm` for my laptop.
+>I typically use Cinnamon as my DE, with optional `bspwm` for my laptop.
+
+I'm using Pop!_OS 22.04 LTS w/ Mutter WM and the Wayland compositor.
 
 
-## `[ $(hostname) == $HOSTNAME ]`
 
-For reference, "argo" is a Linux workstation and "wei" is my Thinkpad T495.
+
+
 
 ## Dependencies
 
-### Full dependency list
+### Endurance dependencies
+
+autoconf
+automake
+borgbackup
+cmake
+ffmpeg
+gnome-tweaks
+gnupg2
+gparted
+imagemagick
+meld
+obs-studio
+parallel
+rsync
+rstudio
+texinfo
+texlive-base
+texlive-latex-extras
+texlive-luatex
+texlive-xetex
+texlive
+texstudio
+util-linux
+vlc
+xclip
+
+### Wei dependencies
 
 * Emacs 24+
 * `tmux`
@@ -29,12 +58,20 @@ For reference, "argo" is a Linux workstation and "wei" is my Thinkpad T495.
 
 ### Bash + tmux
 
-The essential files `.bash_profile` and `.tmux.conf` only rely on `bash` and `tmux`.
+The essential files `.bash_profile` and `.tmux.conf` only rely on `bash` and `tmux`. I'm not using tmux much these days.
 
-### Emacs 24+
+### Emacs 29.4+
 
-Emacs is assumed to be version 24+. Melpa configuration is provided in `init.el` and `.emacs.d/config_lisp_files/common-config.el`. Melpa dependencies are listed in `.emacs.d/package-activated-list.txt`.
+Emacs is assumed to be version 29.4+. Melpa configuration is provided in `init.el` and `.emacs.d/config_lisp_files/common-config.el`. Melpa dependencies are listed in `.emacs.d/package-activated-list.txt`.
 
+
+## Backup
+
+I use `borg` to backup things. Current backup schema involves a `source_files` repository of source tarballs etc., `tarballs` old system/workspace snapshots, `misc` for system configurations and other snapshots.
+
+
+
+<!--
 ### Laptop `bswpm` 'rice'
 
 Other configurations (`bspwm`, `sxhkd`, `polybar`, etc.) are designed for a laptop where power efficiency is key.
@@ -56,3 +93,9 @@ UbuntuMono
 
 Also you'll need to install MaterialIcons.ttf (typically `/usr/share/fonts/`
 
+
+-->
+
+## Fonts
+
+I use fonts.

@@ -1,7 +1,16 @@
 
 ;;(load-theme 'manoj-dark t)
-(load-theme 'spacemacs-dark t)
+;;(load-theme 'spacemacs-dark t)
 ;;(load-theme 'doom-theme t)
+;;(load-theme 'doom-acario-dark t)
+;;(load-theme 'doom-challenger-deep t)
+;;(load-theme 'doom-dracula t)
+;;(load-theme 'doom-dark+ t)
+;;(load-theme 'doom-one t)
+(load-theme 'doom-gruvbox t)
+;;(load-theme 'doom-iovskem t)
+;;(load-theme 'doom-manegarm t)
+
 
 (setq max-lisp-eval-depth 5000)
 (setq inhibit-startup-screen t)
@@ -13,7 +22,7 @@
 
 ;; Transparency
 (setq default-frame-alist
-       '((alpha . 90)))
+       '((alpha . 85)))
 
 
 ;; Split windows on system startup
@@ -53,7 +62,7 @@
 (defun add-hover-video (linktext caption videoid &optional startat)
   " Generate a hovering youtube video. Creates a card that will allow playback if the user clicks on the youtube play button. Will not autoplay on hover. This is more user friendly than previous iterations."
   (interactive "MLink text: \nMCaption: \nMYoutube query \?v=: \nMStart at (optional): \n")
-  (insert (concat (format "<span class=\"hover-video-container\"><a href=\"#\">%s</a><span class=\"hover-video-wrapper\"><iframe class=\"youtube-frame\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s?autoplay=1&start=%s\" title=\"Youtube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe><span class=\"video-caption\">" linktext videoid startat)
+  (insert (concat (format "<span class=\"hover-video-container\"><a href=\"#\">%s</a><span class=\"hover-video-wrapper\"><iframe class=\"youtube-frame\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s?autoplay=0&start=%s\" title=\"Youtube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe><span class=\"video-caption\">" linktext videoid startat)
 		  caption
 		  "</span></span></span>"))
 )
@@ -85,14 +94,15 @@
 ;; Manual install of org-mode 9.8-pre
 ;;(add-to-list 'load-path "~/Projects/org-mode/lisp/")
 ;; Fonts
-;;(add-to-list 'default-frame-alist
-;;             '(font . "Iosevka Term-12"))
+(add-to-list 'default-frame-alist
+             '(font . "IosevkaTerm Nerd Font Mono 12"))
 
+(set-frame-font "Inconsolata LGC Nerd Font Mono 12" nil t)
 
 ;; Use DejaVu Sans Mono as a fallback in fontset-startup
 ;; before resorting to fontset-default.
-;;(set-fontset-font "fontset-startup" nil "DejaVu Sans Mono"
-;;                  nil 'append)
+(set-fontset-font "fontset-startup" nil "DejaVu Sans Mono"
+                  nil 'append)
 
 ;; Garbage Collection
 (use-package gcmh
