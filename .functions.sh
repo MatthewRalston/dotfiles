@@ -4,6 +4,19 @@ function psgrepkill { kill $(ps aux | grep $1 | grep -v grep | awk '{print $2};'
 
 function mostusedcommands { history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10; }
 function reset_path { PATH=/usr/local/bin:/usr/sbin:/usr/bin:/bin:$HOME/bin:$HOME/.local/bin:$HOME/home/bin:$PYENV_ROOT/bin:$PYENV_ROOT/shims:$HOME/.cargo/bin; }
+function screenshooted { cosmic-screenshot --notify --save-dir $HOME/Pictures/screenshots; }
+
+
+
+
+
+
+
+
+
+
+function sortgtf { sort -k1,1 -k4,4n $1; }
+
 
 
 #alias random_rune_sound="find /storage/misc/Dota_rune_mp3s/ -type f -name '*.mp3.mpga' | xargs shuf -n1 -e"
@@ -39,3 +52,4 @@ function play_random_rune_sound {
     #echo "Done" >&2
 }
 export -f play_random_rune_sound
+

@@ -36,33 +36,41 @@ def run_borg_info(borg_repo_path: str):
     runs sudo borg info -a "*" $borg_repo_path
     """
     import subprocess
-
+    from subprocess import Popen, PIPE
     if type(borg_repo_path) is not str:
         raise ValueError("get_borg_info_all_as_string expects a repository path as a string")
 
-    command = 'borg info -a "*" {0}'.format(borg_repo_path)
-
-    sys.stderr.write("Running borg info command: \n\n\n{0}\n\n\n".format(command))
-    sys.stderr.write("Warning: Running borg info may require sudo access and your repository passkey...\n")
 
     
-    results = subprocess.run(command, capture_output=True, text=True, shell=True)
-
-
+    command = 'borg info -a "*" {0}'.format(borg_repo_path)
+    cmd = ["borg", "info", "-a", '"*"', borg_repo_path]
+    sys.stderr.write("Running borg info command: \n\n\n{0}\n\n\n".format(command))
+    sys.stderr.write("Warning: Running borg info may require sudo access and your repository passkey...\n")
+    env = os.environ.copy()
+    env["BORG_RELOCATED_REPO_ACCESS_IS_OK"] = "yes"
+    results = subprocess.run(command, capture_output=True, text=True, shell=True, env=env)
     stdout_string = results.stdout
-
     if results.returncode != 0:
         raise RuntimeError("Unsuccessful exit code on 'borg info -a'")
 
-    #print(stdout_string)
-    #sys.exit(1)
-    
-    stdout_list = list(map(lambda s: "Archive name:" + s, stdout_string.split("Archive name:")))[1:]
+    # Alternate process to pass 'y' if the repository is not located at the appropriate location
+    # process = Popen(cmd, stdin=PIPE, stdout=PIPE, text=True)
 
+    # output, errors = process.communicate("y\n")
+    
+    # if errors:
+    #     print(errors)
+    #     raise RuntimeError(f"Error encountered when running '{command}'")
+    # else:
+
+    #     print(output)
+    #     stdout_string = output
+
+
+    stdout_list = list(map(lambda s: "Archive name:" + s, stdout_string.split("Archive name:")))[1:]
     
     # Print header
     print("\t".join(("Archive_name", "fingerprint", "hostname", "username", "original_size", "compressed_size", "deduplicated_size", )))
-
     
     for archive_stdout_details in stdout_list:
         
@@ -84,22 +92,15 @@ def run_borg_info(borg_repo_path: str):
         elif len(username) != 1:
             print(username)
             raise ValueError("expects 1 'username' per archive.")
-
-
         # print(archive_stdout_details)
         # print(name)
         # print(fingerprint)
         # print(hostname)
         # print(username)
         # print(archive_sizes)
-
-        
-        
         archive_sizes = archive_sizes[0]
         # Make sure there are 3 archive size strings
         assert type(archive_sizes) is tuple and len(archive_sizes) == 3, "Could not process 'borg info -a '*' $repo' archive sizes."
-
-        
         orig_size, compressed_size, dedup_size = archive_sizes
 
         print("\t".join((name[0], fingerprint[0], hostname[0], username[0], orig_size, compressed_size, dedup_size,)))
@@ -108,25 +109,19 @@ def run_borg_info(borg_repo_path: str):
 
 def main():
 
-    print("Do not run as sudo")
-    print("Usage:\n\n\nlist_borg_info_by_size.py BORG_REPO_PATH")
+    usg_statement = """
+    Usage:\n\n\nlist_borg_info_by_size.py BORG_REPO_PATH
+    """
+    print(usg_statement)
     
     if len(sys.argv) != 2:
         print(sys.argv)
-        raise ValueError("Invalid arguments supplied. 1 positional argument required: borg repo filepath.\n\nUsage: list_borg_archive_info_by_size.py BORG_REPO_PATH")
-
-    
+        raise ValueError(f"Invalid arguments supplied. 1 positional argument required: borg repo filepath.\n\n{usg_statement}")
     elif not os.path.isdir(sys.argv[1]):
-
-        
-        
         raise ValueError("Listing borg repository and archive info requires a borg repository filepath that exists on the filesystem.")
-
     
     run_borg_info(sys.argv[1])
-
     sys.stderr.write("\n\nDone...\n\n")
-
 
 if __name__ == '__main__':
     main()

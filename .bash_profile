@@ -34,6 +34,9 @@ alias now="date -Iseconds | sed 's/\ /_/g' | sed 's/\:/-/g' | sed 's/-04-00//g'"
 alias stayon="xset -dmps"
 alias diskspace="du -S | sort -n -r |more"
 alias grabcrons='journalctl -xe | grep CRON'
+alias whatsmyip="ifconfig wlp67s0 | grep 'inet' | head -n1 | awk '{print $2}'"
+alias rmpc="rmpc --address 127.0.0.1:6600"
+alias spotify="flatpak run com.spotify.Client"
 #alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
 #alias deactivatepyenv="PATH=`echo $PATH | tr ':' '\n' | sed '/pyenv/d' | tr '\n' ':' | sed -r 's/:$/\n/'`"
 
@@ -57,10 +60,6 @@ function knit() {
     R -e "rmarkdown::render('$1', pdf_document(), params=list())"
 } # M-x polymode-set-exporter while in poly-markdown+r-mode
 
-function rsync_develop() {
-    rsync -vrltA /develop/projects /ffast/matt/prj
-}
-
 function friendlyrsync() {
     if [ ${2: -1} == "/" ];
     then
@@ -71,20 +70,26 @@ function friendlyrsync() {
     fi
 }
 
+
+function go_to_personal_site() {
+    cd /develop/repos/websites/matthewralston.github.io_chirpy
+}
+
+
 alias ll='ls -h ${LS_OPTS}'
 #Shows hidden files such as bashrc
 alias la='ls -A'
 #shows permissions
-alias l='ls -CFlh'
+#alias l='ls -CFlh'
 
 alias create-patchfile="diff -uNr" #<orig> <new>
-alias cmus='cmus --listen 0.0.0.0'
+#alias cmus='cmus --listen 0.0.0.0'
 
 alias grep='grep --color=auto'
 #alias psgrep='ps aux | grep'
-alias please='sudo $(history -p \!\!)'
+#alias please='sudo $(history -p \!\!)'
 
-alias switch_control='setxkbmap -option caps:ctrl_modifier'
+#alias switch_control='setxkbmap -option caps:ctrl_modifier'
 
 alias RELOAD=". ~/.bash_profile"
 alias REMAP="xmodmap ~/.xmodmap"
@@ -93,7 +98,7 @@ alias topcommands="echo 'Top commands:' && history | tr -s ' ' | cut -d ' ' -f 3
 
 # COLORS!!
 export TERM=xterm-256color
-export GREP_COLOR='1;32'
+export GREP_COLORS='1;32'
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export COLOR_NC='\e[0m' # No Color
@@ -138,6 +143,13 @@ export PATH="${HOME}/edirect:${PATH}"
 
 #export LDFLAGS='-L/usr/lib'
 #export CFLAGS=/usr/include/x86_64-linux-gnu/openssl
+
+###################
+# r o f i
+###################
+xcape -e 'Super_L=Super_L|Alt_L|r'
+
+
 ####################
 # L a n g u a g e s
 ####################
@@ -156,7 +168,9 @@ then
    PATH=$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH
    eval "$(pyenv init -)"
    eval "$(pyenv virtualenv-init -)"
-
+   #export MAMBA_EXE=$HOME/.pyenv/versions/miniforge3-latest/bin/mamba
+   export MAMBA_EXE=$HOME/.pyenv/versions/miniforge3-25.1.1-2/condabin/mamba
+   export MAMBA_ROOT_PREFIX=$HOME/.pyenv/versions/miniforge3-latest
 fi
 
 # L a T e X
@@ -173,7 +187,7 @@ fi
 # ---------------------
 
 # NVM (node version manager)
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -251,21 +265,31 @@ export REFGENIE=/ffast/assemblies/refgenie/genomes.yml
 if [ $(hostname) == "argo" ] || [ $(hostname) == "end4" ] || [ $(hostname) == "endurance" ];
 then
 
-   neofetch # goood ol neofetch
+    neofetch # goood ol neofetch
     #durfetch # Has some bugs with printing characters.
     lolcat $HOME/motd
     lolcat $HOME/.asciiowl.txt
 
+    /usr/games/fortune | pv -qL 200 | lolcat
+    figlet -t -f 'ANSI Shadow' "Necessary... " | lolcat # 3d
+    figlet -t -f 'ANSI Shadow' "Endurance 5" | lolcat
+    figlet -t -f 'ANSI Shadow'    "===================================="
+    echo " |"
+    figlet -t -f 'ANSI Shadow'    "r&r"
+    echo " |"
+    figlet -t -f 'ANSI Shadow'    "===================================="
+    bat ~/.README.md
     # Uses Rust crate 'bat'
-    grep -A 12 "affirmations" /develop/repos/journal/journal_templates/template_daily_journal.md | bat -P --style plain -l md --file-name "You can do this!"
-
+    #grep -A 12 "affirmations" /develop/repos/journal/journal_templates/template_daily_journal.md | bat -P --style plain -l md --file-name "You can do this!"
+    #
+    
     # Traditional x11 keybinding switch caps-lock -> ctrl
     #xmodmap ~/.xmodmap
 
     # Wayland Caps Lock switch
     # No longer used. Use input-remapper-gtk
     # See https://github.com/sezanzeb/input-remapper/blob/HEAD/readme/usage.md
-    setxkbmap -option caps:ctrl_modifier
+    #setxkbmap -option caps:ctrl_modifier
 
     # CUDA / AUTODOCK-VINA
     # find / -type d -name 'cuda*' 2> /dev/null
